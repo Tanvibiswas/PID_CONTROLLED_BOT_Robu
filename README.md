@@ -83,6 +83,28 @@ PID_CONTROLLED_BOT_Robu/
 5. Click **Upload**
 
 ---
+## 🎛️ Tuning Guide — Customize for Any Surface
+
+Depending on your surface, maze size, and motor strength you can tweak these parameters directly in the code:
+
+| Parameter | Location in Code | Default | What to Change |
+|-----------|-----------------|---------|----------------|
+| `baseSpeed` | line 10 | `120` | Increase on smooth surfaces, decrease on rough/carpet |
+| `Kp` | line 12 | `2.5` | Increase for tighter correction, decrease if robot wobbles |
+| `Kd` | line 13 | `3.5` | Increase to reduce oscillation, decrease if robot reacts too slowly |
+| Front stop distance | line 47 `dF < 12` | `12 cm` | Increase for faster turns, decrease for closer wall detection |
+| Dead end distance | line 40 `< 10` | `10 cm` | Adjust based on maze corridor width |
+| Turn duration | line 52 `delay(150)` | `150 ms` | Increase for wider turns, decrease for tighter maze corners |
+| Correction limit | line 60 `constrain(-40, 40)` | `±40` | Increase for sharper steering, decrease for smoother driving |
+
+### 💡 Quick Tips
+
+- **Slow robot / low power motors** → lower `baseSpeed` to `80-100`
+- **Wobbling side to side** → increase `Kd` slightly (try `4.0 - 5.0`)
+- **Not correcting enough** → increase `Kp` slightly (try `3.0 - 3.5`)
+- **Hits walls before turning** → increase front stop distance from `12` to `18-20`
+- **Carpet or rough surface** → increase `baseSpeed` to `150-180`
+- **Wide maze corridors** → increase dead end threshold from `10` to `15`
 
 ## 📌 Known Limitations
 
