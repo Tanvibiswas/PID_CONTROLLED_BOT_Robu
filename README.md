@@ -97,6 +97,46 @@ Depending on your surface, maze size, and motor strength you can tweak these par
 | Turn duration | line 52 `delay(150)` | `150 ms` | Increase for wider turns, decrease for tighter maze corners |
 | Correction limit | line 60 `constrain(-40, 40)` | `±40` | Increase for sharper steering, decrease for smoother driving |
 
+---
+
+## 🧠 Decision Table — Diagnosing Problems in Real Time
+
+Use these tables to identify and fix issues while testing your robot.
+
+### 🔵 Straight Corridor
+
+| Symptom | What it means | Fix |
+|---------|--------------|-----|
+| Zig-zagging | `Kp` too high | Lower `Kp` (try `2.0`) |
+| Fast vibration | `Kd` too low | Increase `Kd` (try `4.0`) |
+| Slow correction | `Kp` too low | Increase `Kp` (try `3.0`) |
+| Sudden jerks | `Kd` too high | Lower `Kd` (try `2.5`) |
+| Constant wall bias | Sensor or mechanical offset | Check sensor alignment or add offset calibration in code |
+
+---
+
+### 🔵 90° Turns
+
+| Symptom | Fix |
+|---------|-----|
+| Hits wall while turning | Lower turn speed by 10 |
+| Over-rotates | Lower `delay(150)` by 30–50ms |
+| Under-rotates | Increase `delay(150)` by 30–50ms |
+| Slips / skids | Lower turn speed |
+
+---
+
+### 🔵 Dead End
+
+| Symptom | Fix |
+|---------|-----|
+| Scrapes walls | Lower rotate speed by 10 |
+| Doesn't fully turn | Increase rotate delay by 50ms |
+| Reverse wobbles | Lower reverse speed |
+| Stuck during reverse | Increase reverse delay slightly |
+
+---
+
 ### 💡 Quick Tips
 
 - **Slow robot / low power motors** → lower `baseSpeed` to `80-100`
